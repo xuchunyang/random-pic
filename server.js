@@ -72,6 +72,27 @@ app.get("/", (req, res) => {
   res.redirect(302, `/?random=${randomDay()}`);
 });
 
+app.get("/api", (req, res) => {
+  res.render("api");
+});
+
+app.use(cors());
+
+app.get("/api/random", (req, res) => {
+  const img = images[randomDay()];
+  const src = `/image/${img.hash}`;
+  res.redirect(302, src);
+});
+
+app.get("/api/random/json", (req, res) => {
+  const img = images[randomDay()];
+  res.json(img);
+});
+
+app.get("/api/images", (req, res) => {
+  res.json(Object.keys(images));
+});
+
 const server = app.listen(
   process.env.PORT || 3000,
   process.env.HOST || "localhost",
