@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  text-align: center;
+  color: #333;
+  line-height: 1.4;
+}
+
+figure {
+}
+
+figcaption {
+}
+
+footer {
+  color: #666;
+  font-size: 80%;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: blue;
+}
+
+a:hover {
+  background-color: blue;
+  color: #eee;
+}
+
+footer a:link,
+footer a:visited {
+}
+
+footer {
+  margin-top: 4em;
+}

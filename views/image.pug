@@ -1,0 +1,19 @@
+doctype html
+html(lang="zh")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title 随机图片
+    style
+      include style.css
+  body
+    .container
+      figure
+        figcaption 
+          p
+            a(href=`${href}`) #{alt}
+        img(src=`${src}` width=`${width}` height=`${height}` alt=`${alt}`)
+      p
+        a(href="/") 换一张
+      footer
+        p 图片来源于维基百科「每日图片」| 本网站代码（GPL-3.0+）托管于 <a href="https://github.com/xuchunyang/fortune">GitHub</a> | <a href="http://beian.miit.gov.cn/">苏ICP备2020065056号</a>
