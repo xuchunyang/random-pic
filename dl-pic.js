@@ -26,7 +26,7 @@ debug("共有 %d 个图片要下载", Object.keys(data).length);
     // key is like "2020-12-02"
     debug("[%d/%d]", i++, Object.keys(data).length);
     if ("error" in data[key]) {
-      debug("跳过 %s, 没有图片, %o", data[key].error);
+      debug("跳过 %s, 没有图片, %o", key, data[key].error);
     } else if ("preferred" in data[key]) {
       await downloadImage(data[key].preferred.url);
     } else {
