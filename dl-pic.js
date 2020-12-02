@@ -25,12 +25,12 @@ debug("共有 %d 个图片要下载", Object.keys(data).length);
   for (let key in data) {
     // key is like "2020-12-02"
     debug("[%d/%d]", i++, Object.keys(data).length);
-    if ("error" in data) {
-      debug("跳过 %s, 没有图片, %o", data.error);
+    if ("error" in data[key]) {
+      debug("跳过 %s, 没有图片, %o", data[key].error);
     } else if ("preferred" in data[key]) {
       await downloadImage(data[key].preferred.url);
     } else {
-      debug("跳过 %s, 有问题，缺少 preferred 数据，%o", data);
+      debug("跳过 %s, 有问题，缺少 preferred 数据，%o", key, data[key]);
     }
   }
 })();
