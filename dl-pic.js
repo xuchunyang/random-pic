@@ -4,6 +4,7 @@ const fs = require("fs");
 const dateFns = require("date-fns");
 const axios = require("axios");
 const crypto = require("crypto");
+const filesize = require("filesize");
 
 const dataDir = path.join(path.dirname(process.argv[1]), "data");
 const jsonFile = path.join(dataDir, "data.json");
@@ -47,6 +48,12 @@ async function downloadImage(url) {
       timeout: 10 * 1000,
     });
     debug("图片将要保存到 %s", filename);
+    if ("content-length" in response.headers) {
+      const content_length = parseInt(response.headers["content-length"]);
+      debug("图片大小：%s", filesize(content_length));
+    } else {
+      debug("有问题，缺少 content-length: %o", response.headers);
+    }
     response.data.pipe(fs.createWriteStream(filename));
   } catch (error) {
     debug("跳过，请求遇到问题：%s", error.message);
