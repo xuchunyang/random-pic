@@ -13,6 +13,13 @@ const app = express();
 app.set("x-powered-by", false);
 app.set("trust proxy", 1);
 
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 300,
+});
+
+app.use(limiter);
+
 app.use(morgan("dev"));
 
 app.use(
