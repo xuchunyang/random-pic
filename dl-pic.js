@@ -43,7 +43,7 @@ debug("共有 %d 个图片要下载", Object.keys(data).length);
 
 async function downloadImage(imageUrl, filename) {
   try {
-    const response = await axios(url, {
+    const response = await axios(imageUrl, {
       responseType: "stream",
       timeout: 10 * 1000,
     });
