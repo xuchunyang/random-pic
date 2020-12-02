@@ -34,21 +34,25 @@ debug("共有 %d 个图片要下载", Object.keys(data).length);
         continue;
       }
       debug("下载图片, %s", url);
-      try {
-        const response = await axios(url, {
-          responseType: "stream",
-          timeout: 10 * 1000,
-        });
-        debug("图片将要保存到 %s", filename);
-        response.data.pipe(fs.createWriteStream(filename));
-      } catch (error) {
-        debug("跳过，请求遇到问题：%s", error.message);
-      }
+      await downloadImage(url, filename);
     } else {
       debug("跳过 %s, 有问题，缺少 preferred 数据，%o", data);
     }
   }
 })();
+
+async function downloadImage(imageUrl, filename) {
+  try {
+    const response = await axios(url, {
+      responseType: "stream",
+      timeout: 10 * 1000,
+    });
+    debug("图片将要保存到 %s", filename);
+    response.data.pipe(fs.createWriteStream(filename));
+  } catch (error) {
+    debug("跳过，请求遇到问题：%s", error.message);
+  }
+}
 
 function md5(string) {
   return crypto.createHash("md5").update(string).digest("hex");
