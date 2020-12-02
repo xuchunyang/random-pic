@@ -27,23 +27,22 @@ debug("共有 %d 个图片要下载", Object.keys(data).length);
     if ("error" in data) {
       debug("跳过 %s, 没有图片, %o", data.error);
     } else if ("preferred" in data[key]) {
-      const url = data[key].preferred.url;
-      const filename = path.join(imageDir, md5(url));
-      if (fs.existsSync(filename)) {
-        debug("图片 %s 已经存在，跳过", filename);
-        continue;
-      }
-      debug("下载图片, %s", url);
-      await downloadImage(url, filename);
+      await downloadImage(data[key].preferred.url);
     } else {
       debug("跳过 %s, 有问题，缺少 preferred 数据，%o", data);
     }
   }
 })();
 
-async function downloadImage(imageUrl, filename) {
+async function downloadImage(url) {
+  const filename = path.join(imageDir, md5(url));
+  if (fs.existsSync(filename)) {
+    debug("图片 %s 已经存在，跳过", filename);
+    return;
+  }
+  debug("下载图片, %s", url);
   try {
-    const response = await axios(imageUrl, {
+    const response = await axios(url, {
       responseType: "stream",
       timeout: 10 * 1000,
     });
