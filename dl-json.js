@@ -44,7 +44,7 @@ if (fs.existsSync(jsonFile)) {
 }
 
 (async () => {
-  const days = dateRange(new Date(2020, 10, 1), new Date());
+  const days = dateRange(startDate, new Date());
   let i = 1;
   console.log("C-c to quit, data will be saved");
   for (const day of days) {
