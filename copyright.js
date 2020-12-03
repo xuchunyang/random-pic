@@ -45,7 +45,7 @@ async function getCopyright(pageTitle) {
       LicenseUrl = LicenseUrl && LicenseUrl.value;
 
       const author = Attribution || Artist || Credit;
-      return { author, LicenseShortName, LicenseUrl };
+      return { pageTitle, author, LicenseShortName, LicenseUrl };
     } else {
       debug(
         "刚好有一页才对，获得了 %d 页面，response.data: %o",
