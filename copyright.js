@@ -72,16 +72,6 @@ function html2text(html) {
 function normalizeAuthor(copyright) {
   if (!copyright.author) return;
   copyright.author = html2text(copyright.author);
-  if (copyright.author.includes("Unknown author")) return null;
-  if (copyright.author.length > 200) {
-    debug(
-      "%o 太长 (%d)，page: https://commons.wikimedia.org/wiki/%s, 不适合直接用",
-      copyright.author,
-      copyright.author.length,
-      copyright.pageTitle
-    );
-    return null;
-  }
 }
 
 module.exports = { getCopyright, normalizeAuthor };
