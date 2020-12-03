@@ -15,5 +15,9 @@ html(lang="zh")
 
         dt <a href="/api/random/json"><code>/api/random/json</code></a>
         dd 返回一张随机图片的 JSON 数据。
+
+        dt <a href="/api/images"><code>/api/images</code></a>
+        dd 返回所有图片，一个 JSON 数组，元素是图片日期。
+
       p API 支持 CORS。同一个 IP 五分钟最多发送 300 次请求，如果超过限制，需等待五分钟后才能使用。
       include foot.pug
