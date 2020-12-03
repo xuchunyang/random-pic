@@ -30,14 +30,22 @@ async function getCopyright(pageTitle) {
       const page = Object.values(pages)[0];
       debug("pageid: %d", page.pageid);
       const extmetadata = page.imageinfo[0].extmetadata;
-      const {
+      let {
         Artist,
         Credit,
         Attribution,
         LicenseUrl,
         LicenseShortName,
       } = extmetadata;
-      return { Artist, Credit, Attribution, LicenseUrl, LicenseShortName };
+
+      Artist = Artist && Artist.value;
+      Credit = Credit && Credit.value;
+      Attribution = Attribution && Attribution.value;
+      LicenseShortName = LicenseShortName && LicenseShortName.value;
+      LicenseUrl = LicenseUrl && LicenseUrl.value;
+
+      const author = Attribution || Artist || Credit;
+      return { author, LicenseShortName, LicenseUrl };
     } else {
       debug(
         "刚好有一页才对，获得了 %d 页面，response.data: %o",
