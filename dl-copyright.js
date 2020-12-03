@@ -6,10 +6,10 @@ const { getCopyright } = require("./copyright.js");
 
 const dataDir = path.join(path.dirname(process.argv[1]), "data");
 const dataJson = path.join(dataDir, "data.json");
-const copyrightJson = path.json(dataDir, "copyright.json");
+const copyrightJson = path.join(dataDir, "copyright.json");
 
 // 对象，键是日期，值是图片对象
-const data = JSON.parse(fs.readFileSync(jsonFile, "utf8"));
+const data = JSON.parse(fs.readFileSync(dataJson, "utf8"));
 
 let copyrights = {};
 if (fs.existsSync(copyrightJson)) {
