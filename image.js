@@ -21,7 +21,11 @@ for (const key in data) {
     if (fs.existsSync(filename)) {
       hashToUrl[hash] = url;
       let copyright = copyrights[key];
-      normalizeAuthor(copyright);
+      if (copyrights) {
+        normalizeAuthor(copyright);
+      } else {
+        debug("缺少 copyright 信息, %s", key);
+      }
       images[key] = {
         hash,
         copyright,
