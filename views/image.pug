@@ -13,6 +13,15 @@ html(lang="zh")
           p
             a(href=`${href}`) #{alt}
         img(src=`${src}` width=`${width}` height=`${height}` alt=`${alt}`)
+        if author
+          figcaption
+            p #{author}
+              if LicenseShortName
+                span , 
+                if LicenseUrl
+                  a(href=`${LicenseUrl}`) #{LicenseShortName}
+                else
+                  span #{LicenseShortName}
       p
         a(href="/") 换一张
       footer

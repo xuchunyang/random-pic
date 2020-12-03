@@ -56,6 +56,7 @@ app.get("/", (req, res) => {
         file_description_url: href,
         preferred: { width, height },
       },
+      copyright: { author, LicenseShortName, LicenseUrl },
     } = img;
     const src = `/image/${img.hash}`;
     const locals = {
@@ -64,6 +65,9 @@ app.get("/", (req, res) => {
       alt,
       width,
       height,
+      author,
+      LicenseShortName,
+      LicenseUrl,
     };
     debug("locals: %o", locals);
     res.render("image", locals);
