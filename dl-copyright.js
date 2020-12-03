@@ -14,7 +14,7 @@ const data = JSON.parse(fs.readFileSync(dataJson, "utf8"));
 let copyrights = {};
 if (fs.existsSync(copyrightJson)) {
   debug("%s 存在，初始化数据", copyrightJson);
-  copyrights = JSON.parse(fs.readFileSync(copyrights, "utf8"));
+  copyrights = JSON.parse(fs.readFileSync(copyrightJson, "utf8"));
 }
 
 (async () => {
