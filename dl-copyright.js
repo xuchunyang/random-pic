@@ -21,6 +21,10 @@ if (fs.existsSync(copyrightJson)) {
   let i = 1;
   for (const key in data) {
     debug("[%d/%d]", i++, Object.keys(data).length);
+    if (key in copyrights) {
+      debug("跳过 %s，已存在", key);
+      continue;
+    }
     if ("error" in data[key]) {
       debug("跳过 %s, 没有图片, %o", key, data[key].error);
     } else {
