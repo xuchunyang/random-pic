@@ -69,6 +69,9 @@ app.get("/", (req, res) => {
       LicenseShortName,
       LicenseUrl,
     };
+    if (locals.alt) {
+      locals.alt = path.basename(alt, path.extname(alt));
+    }
     debug("locals: %o", locals);
     res.render("image", locals);
     return;
