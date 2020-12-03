@@ -20,3 +20,8 @@ test("File:Washington_Dulles_International_Airport_at_Dusk.jpg", async () => {
   );
   console.log(result);
 });
+
+test("File:Eisenhower_d-day.jpg.jpg", async () => {
+  const result = await getCopyright("File:Eisenhower_d-day.jpg");
+  console.log(result);
+});
