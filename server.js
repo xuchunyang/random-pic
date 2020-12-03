@@ -93,6 +93,15 @@ app.get("/api/images", (req, res) => {
   res.json(Object.keys(images));
 });
 
+app.get("/api/image/:day", (req, res) => {
+  const day = req.params.day;
+  if (!(day in images)) {
+    res.json({ error: "No such day" });
+    return;
+  }
+  res.json(images[day]);
+});
+
 const server = app.listen(
   process.env.PORT || 3000,
   process.env.HOST || "localhost",
