@@ -1,3 +1,7 @@
 #+TITLE: 返回一张随机图片
 
 图片来源于维基百科每日图片。
+
+提供 Web 访问和 API 接口：
+
+https://random-pic.cadr.xyz
