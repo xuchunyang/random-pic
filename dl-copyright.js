@@ -56,7 +56,7 @@ if (fs.existsSync(copyrightJson)) {
 
 function saveData() {
   debug("保存结果到 %s", copyrightJson);
-  fs.writeFileSync(copyrightJson, JSON.stringify(data, null, 2));
+  fs.writeFileSync(copyrightJson, JSON.stringify(copyrights, null, 2));
 }
 
 function dateRange(start, end) {
@@ -68,7 +68,7 @@ function dateRange(start, end) {
 }
 
 process.on("SIGINT", () => {
-  console.log("on SIGINT, save data to disk");
-  fs.writeFileSync(copyrightJson, JSON.stringify(data, null, 2));
+  console.log("on SIGINT, save copyrights to disk");
+  fs.writeFileSync(copyrightJson, JSON.stringify(copyrights, null, 2));
   process.exit(1);
 });
