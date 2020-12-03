@@ -1,12 +1,15 @@
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
+const { normalizeAuthor } = require("./copyright.js");
 
 const dataDir = path.join(__dirname, "data");
 const jsonFile = path.join(dataDir, "data.json");
 const imageDir = path.join(dataDir, "image");
+const copyrightFile = path.join(dataDir, "copyright.json");
 
 const data = JSON.parse(fs.readFileSync(jsonFile, "utf8"));
+const copyrights = JSON.parse(fs.readFileSync(copyrightFile, "utf8"));
 
 const images = {};
 const hashToUrl = {};
@@ -17,8 +20,11 @@ for (const key in data) {
     const filename = path.join(imageDir, md5(url));
     if (fs.existsSync(filename)) {
       hashToUrl[hash] = url;
+      let copyright = copyrights[key];
+      normalizeAuthor(copyright);
       images[key] = {
         hash,
+        copyright,
         data_provided_wikipedia: data[key],
       };
     }
@@ -32,7 +38,7 @@ function randomImage() {
 }
 
 function randomDay() {
-  return arrayRandomItem(days); 
+  return arrayRandomItem(days);
 }
 
 module.exports = { hashToUrl, images, randomDay, randomImage };

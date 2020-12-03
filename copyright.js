@@ -4,7 +4,8 @@
 // https://www.mediawiki.org/wiki/API:Imageinfo
 
 const axios = require("axios");
-const debug = require("debug")("copyright");
+const debug = require("debug")("pic:copyright");
+const { htmlToText } = require("html-to-text");
 
 // 页面
 // https://commons.wikimedia.org/wiki/File:Maggie_Roswell.jpg
@@ -58,4 +59,29 @@ async function getCopyright(pageTitle) {
   }
 }
 
-module.exports = { getCopyright };
+function html2text(html) {
+  return htmlToText(html, {
+    tags: {
+      a: {
+        options: { ignoreHref: true },
+      },
+    },
+  }).trim();
+}
+
+function normalizeAuthor(copyright) {
+  if (!copyright.author) return;
+  copyright.author = html2text(copyright.author);
+  if (copyright.author.includes("Unknown author")) return null;
+  if (copyright.author.length > 200) {
+    debug(
+      "%o 太长 (%d)，page: https://commons.wikimedia.org/wiki/%s, 不适合直接用",
+      copyright.author,
+      copyright.author.length,
+      copyright.pageTitle
+    );
+    return null;
+  }
+}
+
+module.exports = { getCopyright, normalizeAuthor };
