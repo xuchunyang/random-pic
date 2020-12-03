@@ -51,4 +51,24 @@ if (fs.existsSync(copyrightJson)) {
       }
     }
   }
+  saveData();
 })();
+
+function saveData() {
+  debug("保存结果到 %s", copyrightJson);
+  fs.writeFileSync(copyrightJson, JSON.stringify(data, null, 2));
+}
+
+function dateRange(start, end) {
+  const days = [];
+  for (let i = start; i < end; i.setDate(i.getDate() + 1)) {
+    days.push(new Date(i));
+  }
+  return days;
+}
+
+process.on("SIGINT", () => {
+  console.log("on SIGINT, save data to disk");
+  fs.writeFileSync(copyrightJson, JSON.stringify(data, null, 2));
+  process.exit(1);
+});
