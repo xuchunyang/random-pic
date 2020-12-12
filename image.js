@@ -1,3 +1,4 @@
+const debug = require("debug")("random-pic:image");
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
@@ -21,7 +22,7 @@ for (const key in data) {
     if (fs.existsSync(filename)) {
       hashToUrl[hash] = url;
       let copyright = copyrights[key];
-      if (copyrights) {
+      if (copyright) {
         normalizeAuthor(copyright);
       } else {
         debug("缺少 copyright 信息, %s", key);
